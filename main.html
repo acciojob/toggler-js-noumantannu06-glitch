@@ -8,22 +8,30 @@
 
 <body>
 	<!-- the entire body must be written by student -->
-	 <h2>How do you want your project to be</h2>
+	 <div class="container">
+        <h2>How do you want your project to be</h2>
+        
+        <div class="toggle-container">
+            <div class="g1">
+                <input type="checkbox" id="good" class="toggle">
+                <label for="good" class="toggle-label">good</label>
+            </div>
+            
+            <div class="g2">
+                <input type="checkbox" id="cheap" class="toggle">
+                <label for="cheap" class="toggle-label">cheap</label>
+            </div>
+            
+            <div class="g3">
+                <input type="checkbox" id="fast" class="toggle">
+                <label for="fast" class="toggle-label">fast</label>
+            </div>
+        </div>
 
-  <div class="toggle-container g1">
-    <input type="checkbox" id="good" class="toggle" />
-    <span>good</span>
-  </div>
-
-  <div class="toggle-container g2">
-    <input type="checkbox" id="cheap" class="toggle" />
-    <span>cheap</span>
-  </div>
-
-  <div class="toggle-container g3">
-    <input type="checkbox" id="fast" class="toggle" />
-    <span>fast</span>
-  </div>
+        <div class="selected-count" id="selectedCount">
+            Select up to 2 options
+        </div>
+    </div>
 
     <script type="text/javascript" src="./script.js">
 </script>

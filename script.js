@@ -1,46 +1,35 @@
-describe('Check for checkboxes - COMPLETE SOLUTION', () => {
-  beforeEach(() => {
-    cy.visit('http://localhost:3000');
-    cy.wait(2000);
-  });
+  // 🔥 MAX 2 CHECKBOXES LOGIC
+        const toggles = document.querySelectorAll('.toggle');
+        const selectedCountEl = document.getElementById('selectedCount');
+        
+        let selectedToggles = [];
 
-  it('1) check if three checkboxes are present', () => {
-    cy.get('input[type="checkbox"]').should('have.length', 3);
-  });
-
-  it('2) check if text present in all spans of checkboxes is correct', () => {
-    cy.get('input[type="checkbox"]').should('have.length', 3);
-    
-    cy.get('input[type="checkbox"]').each(($checkbox, index) => {
-      // Find span associated with this checkbox
-      cy.wrap($checkbox)
-        .closest('label')  // Common pattern
-        .find('span')
-        .or($checkbox.siblings('span'))  // Alternative
-        .invoke('text')
-        .should('not.be.empty')
-        .then((text) => {
-          cy.log(`Checkbox ${index + 1}: "${text.trim()}"`);
+        toggles.forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const isChecked = this.checked;
+                const toggleId = this.id;
+                
+                if (isChecked) {
+                    // If already 2 selected, uncheck the first one and check new one
+                    if (selectedToggles.length >= 2) {
+                        const firstSelected = selectedToggles.shift();
+                        document.getElementById(firstSelected).checked = false;
+                    }
+                    
+                    // Add current to selected
+                    selectedToggles.push(toggleId);
+                } else {
+                    // Remove from selected if unchecked
+                    selectedToggles = selectedToggles.filter(id => id !== toggleId);
+                }
+                
+                updateSelectedCount();
+            });
         });
-    });
-  });
 
-  it('3) check if clicking on checkbox is working fine', () => {
-    cy.get('input[type="checkbox"]:eq(0)')
-      .click()
-      .should('be.checked');
-  });
-
-  it('4) check if all three checkboxes are active at a time or not', () => {
-    // Uncheck all
-    cy.get('input[type="checkbox"]').uncheck();
-    
-    // Check all three
-    cy.get('input[type="checkbox"]').each(($cb) => {
-      cy.wrap($cb).check();
-    });
-    
-    // All should be checked
-    cy.get('input[type="checkbox"]:checked').should('have.length', 3);
-  });
-});
+        function updateSelectedCount() {
+            const count = selectedToggles.length;
+            selectedCountEl.textContent = count === 0 
+                ? 'Select up to 2 options' 
+                : `${count} option${count > 1 ? 's' : ''} selected`;
+        }
