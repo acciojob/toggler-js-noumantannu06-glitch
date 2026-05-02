@@ -1,1 +1,24 @@
 /*  your css code here. If applicable */
+ body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .toggle {
+      width: 18px;
+      height: 18px;
+      accent-color: #4caf50;
+      cursor: pointer;
+    }
+
+    span {
+      font-size: 18px;
+      text-transform: capitalize;
+    }
