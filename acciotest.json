@@ -1,0 +1,4 @@
+{
+    "testRepo": "toggler-js-solution",
+    "pathToFile": "cypress/integration/tests/test.spec.js"
+}
