@@ -1,37 +1,30 @@
-document.addEventListener("DOMContentLoaded", function () {
+ const checkboxes = document.querySelectorAll(".toggle");
 
-  const checkboxes = document.querySelectorAll(".toggle");
+    function updateToggles() {
+      const selected = Array.from(checkboxes).filter(cb => cb.checked);
 
-  if (!checkboxes.length) {
-    console.error("Checkboxes not found"); // prevents silent crash
-    return;
-  }
+      if (selected.length > 2) {
+        const lastClicked = selected[2];
+        lastClicked.checked = false;
 
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("click", function () {
-
-      // ✅ allow checking first
-      this.checked = true;
-
-      // ❗ If your test expects ONLY ONE checked
-      checkboxes.forEach((cb) => {
-        if (cb !== this) {
-          cb.checked = false;
+        const parent = lastClicked.closest(".g1, .g2, .g3");
+        if (parent) {
+          parent.classList.remove("selected");
         }
-		  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("click", function () {
+      }
+    }
 
-      // ✅ allow checking first
-      this.checked = true;
+    checkboxes.forEach(cb => {
+		cd.addEventListener("change", () => {
+			const parent = cd.closest(",g1, .g2, .g3");
+			if (!parent) return;
 
-      // ❗ If your test expects ONLY ONE checked
-      checkboxes.forEach((cb) => {
-        if (cb !== this) {
-          cb.checked = false;
-        }
-      });
-
-    });
-  });
-
-});
+			if (cd.checked) {
+				parent.classList.add("selected");
+			} else {
+				parent.classList.remove("selected")
+			}
+			// important: apply constraint *after* DOM state is set
+			updateToggles()
+		});
+	});
